@@ -18,6 +18,7 @@ import { Plus } from "lucide-react";
 import { pb } from "@/lib/pocketbase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { blockTypeNames } from "@/constants/blocks";
 
 interface AddBlockProps {
   type: BlockType;
@@ -53,13 +54,6 @@ export function AddBlock({ type }: AddBlockProps) {
         description: `Block '${name}' could not be created`,
       });
     }
-  };
-
-  const blockTypeNames = {
-    [BlockType.component_block]: "Component",
-    [BlockType.text_block]: "Text",
-    [BlockType.image_block]: "Image",
-    [BlockType.button_block]: "Button",
   };
 
   if (!user) return null;

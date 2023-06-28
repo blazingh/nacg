@@ -53,6 +53,18 @@ export const pb = {
     return null;
   },
 
+  delete: async (
+    collection: string,
+    id: string,
+    query?: ListQueryParams
+  ): Promise<boolean | null> => {
+    try {
+      const result = await client.collection(collection).delete(id, query);
+      return result;
+    } catch (error: any) { }
+    return null;
+  },
+
   authWithOAuth2: async (
     collection: string,
     authConfig: OAuth2AuthConfig
