@@ -10,14 +10,14 @@ export const pb = {
   ): Promise<ItemType | null> => {
     try {
       const result = await client.collection(collection).getOne(id, query);
-      return result ? (result.export() as ItemType) : null;
+      return result.$export() as ItemType;
     } catch (error: any) { }
     return null;
   },
 
   geFullList: async <ItemType>(
     collection: string,
-    query: ListQueryParams
+    query?: ListQueryParams
   ): Promise<ItemType[] | null> => {
     try {
       const result = await client.collection(collection).getFullList(query);
@@ -33,7 +33,7 @@ export const pb = {
   ): Promise<ItemType | null> => {
     try {
       const result = await client.collection(collection).create(body, query);
-      return result ? (result.export() as ItemType) : null;
+      return result ? (result.$export() as ItemType) : null;
     } catch (error: any) { }
     return null;
   },
@@ -48,7 +48,7 @@ export const pb = {
       const result = await client
         .collection(collection)
         .update(id, body, query);
-      return result ? (result.export() as ItemType) : null;
+      return result ? (result.$export() as ItemType) : null;
     } catch (error: any) { }
     return null;
   },

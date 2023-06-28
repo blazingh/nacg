@@ -1,6 +1,6 @@
 "use client";
 import { pb } from "@/lib/pocketbase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IAuthHook {
   user: any | null;
@@ -21,6 +21,12 @@ export const UseAuthHook = (): IAuthHook => {
     pb.client.authStore.clear();
     setUser(null);
   };
+
+  useEffect(() => {
+    if (pb.client.authStore.model) {
+      setUser(pb.client.authStore.model);
+    }
+  }, []);
 
   return {
     user,
