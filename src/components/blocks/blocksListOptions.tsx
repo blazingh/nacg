@@ -24,6 +24,7 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { blockTypeNames } from "@/constants/blocks";
+import { useState } from "react";
 
 export function BlocksListOptions({
   block,
@@ -35,6 +36,7 @@ export function BlocksListOptions({
   const { user } = UseAuthHook();
   const router = useRouter();
 
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { toast } = useToast();
 
   const handleDeleteBlock = async () => {
@@ -45,6 +47,7 @@ export function BlocksListOptions({
         title: "Block deleted",
         description: `${blockTypeNames[type]} Block '${block.name}' deleted successfully`,
       });
+      setDialogOpen(false);
       router.refresh();
     } else {
       toast({
@@ -56,7 +59,7 @@ export function BlocksListOptions({
   };
 
   return (
-    <Dialog>
+    <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <MoreHorizontalIcon className="w-4 h-4" />
