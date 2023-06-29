@@ -40,7 +40,7 @@ export function BlocksListOptions({
   const { toast } = useToast();
 
   const handleDeleteBlock = async () => {
-    const res = await pb.delete(type + "s", block.id);
+    const res = await pb.delete(type, block.id);
 
     if (res) {
       toast({
@@ -61,12 +61,15 @@ export function BlocksListOptions({
   return (
     <Dialog open={dialogOpen} onOpenChange={(open) => setDialogOpen(open)}>
       <DropdownMenu>
+        {/* three dots icon */}
         <DropdownMenuTrigger>
           <MoreHorizontalIcon className="w-4 h-4" />
         </DropdownMenuTrigger>
+        {/* dropdown menu */}
         <DropdownMenuContent>
           <DropdownMenuLabel>Options</DropdownMenuLabel>
           <DropdownMenuSeparator />
+          {/* preview */}
           <DropdownMenuItem
             onClick={() => router.push(`/view/${type}/${block.id}`)}
             className="flex items-center"
@@ -75,19 +78,19 @@ export function BlocksListOptions({
             Preview
           </DropdownMenuItem>
           {user && (
-            <DropdownMenuItem
-              onClick={() => router.push(`/edit/${type}/${block.id}`)}
-              className="flex items-center"
-            >
-              <Edit className="w-4 h-4 mr-2" />
-              Modify
-            </DropdownMenuItem>
-          )}
-          {user && (
             <>
+              {/* edit */}
+              <DropdownMenuItem
+                onClick={() => router.push(`/edit/${type}/${block.id}`)}
+                className="flex items-center mt-2"
+              >
+                <Edit className="w-4 h-4 mr-2" />
+                Modify
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
+              {/* delete */}
               <DialogTrigger asChild>
-                <DropdownMenuItem className="flex items-center">
+                <DropdownMenuItem className="flex items-center mt-2">
                   <Trash className="w-4 h-4 mr-2" />
                   Delete
                 </DropdownMenuItem>

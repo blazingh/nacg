@@ -1,10 +1,10 @@
 import { CSSProperties } from "react";
 
 export enum BlockType {
-  component_block = "component_block",
-  text_block = "text_block",
-  image_block = "image_block",
-  button_block = "button_block",
+  componentBlock = "component_blocks",
+  textBlock = "text_blocks",
+  imageBlock = "image_blocks",
+  buttonBlock = "button_blocks",
 }
 
 export enum BlockChildScope {

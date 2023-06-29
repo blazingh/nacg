@@ -3,6 +3,7 @@ import { BlocksList } from "@/components/blocks/blocksList";
 import { Label } from "@/components/ui/label";
 import { pb } from "@/lib/pocketbase";
 import { BlockType, ComponentBlock } from "@/types/blocks";
+import { Frame, ImageIcon, MousePointerClick, Quote } from "lucide-react";
 
 export const revalidate = 0;
 
@@ -18,37 +19,57 @@ export default async function Home() {
   const buttonBlocks = await pb.geFullList<ComponentBlock>("button_blocks");
 
   return (
-    <div>
+    <div className="w-full flex flex-col gap-y-6 items-center">
       {/* <pre className="text-xs">{JSON.stringify(componentBlocks, null, 2)}</pre> */}
       {/* <pre className="text-xs">{JSON.stringify(textBlocks, null, 2)}</pre> */}
       {/* <pre className="text-xs">{JSON.stringify(imageBlocks, null, 2)}</pre> */}
       {/* <pre className="text-xs">{JSON.stringify(buttonBlocks, null, 2)}</pre> */}
-      <div className="flex flex-row align-center">
-        <h1>components</h1>
-        <AddBlock type={BlockType.component_block} />
+      <div className="max-w-6xl w-full">
+        <div className="flex flex-row items-center w-full justify-between mb-2 h-10">
+          <div className="flex flex-row items-center">
+            <Frame className="mr-2" />
+            <Label className="text-xl font-semibold">Components</Label>
+          </div>
+          <AddBlock type={BlockType.componentBlock} />
+        </div>
+        <BlocksList
+          blocks={componentBlocks || []}
+          type={BlockType.componentBlock}
+        />
       </div>
-      <BlocksList
-        blocks={componentBlocks || []}
-        type={BlockType.component_block}
-      />
 
-      <div className="flex flex-row align-center">
-        <h1>text</h1>
-        <AddBlock type={BlockType.text_block} />
+      <div className="max-w-6xl w-full">
+        <div className="flex flex-row items-center w-full justify-between mb-2 h-10">
+          <div className="flex flex-row items-center">
+            <Quote className="mr-2" />
+            <Label className="text-xl font-semibold">Text</Label>
+          </div>
+          <AddBlock type={BlockType.textBlock} />
+        </div>
+        <BlocksList blocks={textBlocks || []} type={BlockType.textBlock} />
       </div>
-      <BlocksList blocks={textBlocks || []} type={BlockType.text_block} />
 
-      <div className="flex flex-row align-center">
-        <h1>images</h1>
-        <AddBlock type={BlockType.image_block} />
+      <div className="max-w-6xl w-full">
+        <div className="flex flex-row items-center w-full justify-between mb-2 h-10">
+          <div className="flex flex-row items-center">
+            <ImageIcon className="mr-2" />
+            <Label className="text-xl font-semibold">Images</Label>
+          </div>
+          <AddBlock type={BlockType.imageBlock} />
+        </div>
+        <BlocksList blocks={imageBlocks || []} type={BlockType.imageBlock} />
       </div>
-      <BlocksList blocks={imageBlocks || []} type={BlockType.image_block} />
 
-      <div className="flex flex-row align-center">
-        <h1>buttons</h1>
-        <AddBlock type={BlockType.button_block} />
+      <div className="max-w-6xl w-full">
+        <div className="flex flex-row items-center w-full justify-between mb-2 h-10">
+          <div className="flex flex-row items-center">
+            <MousePointerClick className="mr-2" />
+            <Label className="text-xl font-semibold">Buttons</Label>
+          </div>
+          <AddBlock type={BlockType.buttonBlock} />
+        </div>
+        <BlocksList blocks={buttonBlocks || []} type={BlockType.buttonBlock} />
       </div>
-      <BlocksList blocks={buttonBlocks || []} type={BlockType.button_block} />
     </div>
   );
 }

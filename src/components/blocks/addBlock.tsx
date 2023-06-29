@@ -36,7 +36,7 @@ export function AddBlock({ type }: AddBlockProps) {
   const router = useRouter();
 
   const handleAddBlock = async () => {
-    const res = await pb.create<Block>(type + "s", {
+    const res = await pb.create<Block>(type, {
       name,
     });
 

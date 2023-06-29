@@ -1,5 +1,6 @@
 import { Block, BlockType } from "@/types/blocks";
 import { BlocksListOptions } from "./blocksListOptions";
+import { Label } from "../ui/label";
 
 interface BlocksList {
   blocks: Block[];
@@ -12,13 +13,13 @@ export function BlocksList({ blocks, type }: BlocksList) {
       {blocks.map((block) => (
         <div
           key={block.id}
-          className="h-24 border w-64 rounded bg-secondary p-2 relative"
+          className="h-24 border w-64 rounded bg-secondary p-2 relative justify-between flex flex-col"
         >
           <div className="absolute top-0 right-0 p-2">
             <BlocksListOptions block={block} type={type} />
           </div>
-          <h2>{block.name}</h2>
-          <p>{block.id}</p>
+          <Label className="text-xl font-semibold">{block.name}</Label>
+          <Label className="text-sm">id : {block.id}</Label>
         </div>
       ))}
     </div>

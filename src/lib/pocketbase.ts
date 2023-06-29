@@ -10,7 +10,7 @@ export const pb = {
   ): Promise<ItemType | null> => {
     try {
       const result = await client.collection(collection).getOne(id, query);
-      return result.$export() as ItemType;
+      return JSON.parse(JSON.stringify(result)) as ItemType;
     } catch (error: any) { }
     return null;
   },
@@ -21,7 +21,7 @@ export const pb = {
   ): Promise<ItemType[] | null> => {
     try {
       const result = await client.collection(collection).getFullList(query);
-      return result ? (result as ItemType[]) : null;
+      return JSON.parse(JSON.stringify(result)) as ItemType[];
     } catch (error: any) { }
     return null;
   },
@@ -33,7 +33,7 @@ export const pb = {
   ): Promise<ItemType | null> => {
     try {
       const result = await client.collection(collection).create(body, query);
-      return result ? (result.$export() as ItemType) : null;
+      return JSON.parse(JSON.stringify(result)) as ItemType;
     } catch (error: any) { }
     return null;
   },
@@ -48,7 +48,7 @@ export const pb = {
       const result = await client
         .collection(collection)
         .update(id, body, query);
-      return result ? (result.$export() as ItemType) : null;
+      return JSON.parse(JSON.stringify(result)) as ItemType;
     } catch (error: any) { }
     return null;
   },
@@ -73,7 +73,7 @@ export const pb = {
       const result = await client
         .collection(collection)
         .authWithOAuth2(authConfig);
-      return result ? (result as any) : null;
+      return result;
     } catch (error: any) { }
     return null;
   },
