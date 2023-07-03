@@ -1,7 +1,7 @@
 import BlockEdit from "@/components/edit/blockEdit";
 import BlockInfo from "@/components/edit/blockInfo";
 import { pb } from "@/lib/pocketbase";
-import { Block } from "@/types/blocks";
+import { Block, BlockType } from "@/types/blocks";
 
 export const revalidate = 0;
 
@@ -13,7 +13,17 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
+  // check if block exist in BlockTypes enum
+  if (!Object.values(BlockType).includes(params.block as any))
+    return (
+      <div>
+        <p>Block Type not found</p>
+      </div>
+    );
+
   const block = await pb.getOne<Block>(params.block, params.id);
+
+  // check if block and type are valid
 
   if (!block)
     return (
@@ -24,8 +34,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div>
-      <BlockEdit _block={block} type={params.block as any} />
-      <pre className="text-xs">{JSON.stringify(block, null, 2)}</pre>
+      <BlockEdit _block={block} type={params.block as BlockType} />
     </div>
   );
 }

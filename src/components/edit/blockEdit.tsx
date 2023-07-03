@@ -57,8 +57,12 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
     <BlockEditContext.Provider
       value={{ block, type, updateBlockState, saveBlock }}
     >
-      <div>
-        <BlockInfo />
+      <div className="w-full h-full grid grid-cols-6">
+        <div className="col-span-1">
+          <BlockInfo />
+        </div>
+        <div className="col-span-4"></div>
+        <div className="col-span-1"></div>
       </div>
     </BlockEditContext.Provider>
   );

@@ -1,12 +1,10 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { BlockEditContext } from "./blockEdit";
 import { InputWithLabel } from "../ui/input-with-label";
 
 export default function BlockInfo() {
   const blockEditContext = useContext(BlockEditContext);
-
-  console.log("blockEditContext", blockEditContext);
 
   if (!blockEditContext)
     return (
@@ -30,10 +28,12 @@ export default function BlockInfo() {
             saveBlock();
           }}
         />
-
-        <p>no block data</p>
       </div>
     );
 
-  return <div></div>;
+  return (
+    <div>
+      <p>no block</p>
+    </div>
+  );
 }
