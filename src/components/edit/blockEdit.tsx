@@ -15,7 +15,7 @@ interface BlockEditContext {
   updateBlock: () => void;
 }
 
-export const BlockContext = createContext<BlockEditContext | null>(null);
+export const BlockEditContext = createContext<BlockEditContext | null>(null);
 
 export default function BlockEdit({ _block, type }: BlockEditProps) {
   const { toast } = useToast();
@@ -43,12 +43,12 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
   };
 
   return (
-    <BlockContext.Provider
+    <BlockEditContext.Provider
       value={{ block, type, updateBlockState, updateBlock }}
     >
       <div>
         <p>BlockEdit</p>
       </div>
-    </BlockContext.Provider>
+    </BlockEditContext.Provider>
   );
 }

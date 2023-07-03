@@ -1,14 +1,20 @@
 "use client";
 import { Block, BlockType } from "@/types/blocks";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { BlockEditContext } from "./blockEdit";
 
-interface BlockInfoProps {
-  _block: Block;
-  type: BlockType;
-}
+export default function BlockInfo() {
+  const blockEditContext = useContext(BlockEditContext);
 
-export default function BlockInfo({ _block, type }: BlockInfoProps) {
-  const [block, setBlock] = useState<Block>(_block);
+  if (!blockEditContext)
+    return (
+      <div>
+        <p>no block edit context</p>
+      </div>
+    );
+
+  const { block, updateBlockState } = blockEditContext;
+
   if (!block)
     return (
       <div>
