@@ -1,4 +1,6 @@
+import BlockInfo from "@/components/edit/blockInfo";
 import { pb } from "@/lib/pocketbase";
+import { Block } from "@/types/blocks";
 
 interface PageProps {
   params: {
@@ -7,8 +9,8 @@ interface PageProps {
   };
 }
 
-export default function Page({ params }: PageProps) {
-  const block = pb.getOne(params.block, params.id);
+export default async function Page({ params }: PageProps) {
+  const block = await pb.getOne<Block>(params.block, params.id);
 
   if (!block)
     return (
@@ -19,6 +21,7 @@ export default function Page({ params }: PageProps) {
 
   return (
     <div>
+      <BlockInfo _block={block} />
       <pre className="text-xs">{JSON.stringify(block, null, 2)}</pre>
     </div>
   );
