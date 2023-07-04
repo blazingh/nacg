@@ -1,12 +1,9 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import { useContext } from "react";
 import { BlockEditContext } from "./blockEdit";
-
-interface BlockPropertiesContext { }
-
-export const BockPropertiesContext =
-  createContext<BlockPropertiesContext | null>(null);
+import { BlockType } from "@/types/blocks";
+import { ComponentProperties } from "./componentPorpreties";
 
 export function BlockProperties() {
   const blockEditContext = useContext(BlockEditContext);
@@ -18,13 +15,16 @@ export function BlockProperties() {
       </div>
     );
 
-  const { block, updateBlockState, saveBlock } = blockEditContext;
+  const { block, updateBlockState, saveBlock, type } = blockEditContext;
 
-  return (
-    <BockPropertiesContext.Provider value={{}}>
-      <div>
-        <p>Block Properties</p>
-      </div>
-    </BockPropertiesContext.Provider>
-  );
+  switch (type) {
+    case BlockType.componentBlock:
+      return <ComponentProperties />;
+    default:
+      return (
+        <div>
+          <p>Block Properties</p>
+        </div>
+      );
+  }
 }
