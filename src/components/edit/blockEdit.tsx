@@ -10,14 +10,6 @@ interface BlockEditProps {
   type: BlockType;
 }
 
-interface BlockEditContext {
-  block: Block;
-  type: BlockType;
-  updateBlockState: (value: { [key: string]: any }) => void;
-  saveBlock: () => void;
-}
-
-export const BlockEditContext = createContext<BlockEditContext | null>(null);
 
 export default function BlockEdit({ _block, type }: BlockEditProps) {
   const { toast } = useToast();
@@ -54,16 +46,12 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
   };
 
   return (
-    <BlockEditContext.Provider
-      value={{ block, type, updateBlockState, saveBlock }}
-    >
-      <div className="w-full h-full grid grid-cols-6">
-        <div className="col-span-1">
-          <BlockInfo />
-        </div>
-        <div className="col-span-4"></div>
-        <div className="col-span-1"></div>
+    <div className="w-full h-full grid grid-cols-6">
+      <div className="col-span-1">
+        <BlockInfo />
       </div>
-    </BlockEditContext.Provider>
+      <div className="col-span-4"></div>
+      <div className="col-span-1"></div>
+    </div>
   );
 }
