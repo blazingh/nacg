@@ -39,23 +39,43 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
   };
 
   const updateBlockStyle = (key: string, value: any) => {
-    setBlock((prev) => ({
-      ...prev,
-      porperties: {
-        ...prev.property,
-        style: { ...prev.property.style, [key]: value },
-      },
-    }));
+    // check if property has style object
+    if (!block.property.style)
+      setBlock((prev) => ({
+        ...prev,
+        porperty: {
+          ...prev.property,
+          style: { [key]: value },
+        },
+      }));
+    else
+      setBlock((prev) => ({
+        ...prev,
+        porperty: {
+          ...prev.property,
+          style: { ...prev.property.style, [key]: value },
+        },
+      }));
   };
 
   const updateBlockExtra = (key: string, value: any) => {
-    setBlock((prev) => ({
-      ...prev,
-      porperties: {
-        ...prev.property,
-        extra: { ...prev.property.extra, [key]: value },
-      },
-    }));
+    // check if property has extra object
+    if (!block.property.extra)
+      setBlock((prev) => ({
+        ...prev,
+        porperty: {
+          ...prev.property,
+          extra: { [key]: value },
+        },
+      }));
+    else
+      setBlock((prev) => ({
+        ...prev,
+        porperty: {
+          ...prev.property,
+          extra: { ...prev.property.extra, [key]: value },
+        },
+      }));
   };
 
   const saveBlock = async () => {
