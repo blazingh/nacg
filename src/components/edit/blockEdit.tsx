@@ -10,6 +10,17 @@ interface BlockEditProps {
   type: BlockType;
 }
 
+interface BlockEditContext {
+  block: Block;
+  type: BlockType;
+  updateBlockState: (value: { [key: string]: any }) => void;
+  updateBlockProperty: (key: string, value: any) => void;
+  updateBlockStyle: (key: string, value: any) => void;
+  updateBlockExtra: (key: string, value: any) => void;
+  saveBlock: () => void;
+}
+
+export const BlockEditContext = createContext<BlockEditContext | null>(null);
 
 export default function BlockEdit({ _block, type }: BlockEditProps) {
   const { toast } = useToast();
@@ -18,6 +29,33 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
 
   const updateBlockState = (value: { [key: string]: any }) => {
     setBlock((prev) => ({ ...prev, ...value }));
+  };
+
+  const updateBlockProperty = (key: string, value: any) => {
+    setBlock((prev) => ({
+      ...prev,
+      properties: { ...prev.properties, [key]: value },
+    }));
+  };
+
+  const updateBlockStyle = (key: string, value: any) => {
+    setBlock((prev) => ({
+      ...prev,
+      porperties: {
+        ...prev.properties,
+        style: { ...prev.properties.style, [key]: value },
+      },
+    }));
+  };
+
+  const updateBlockExtra = (key: string, value: any) => {
+    setBlock((prev) => ({
+      ...prev,
+      porperties: {
+        ...prev.properties,
+        extra: { ...prev.properties.extra, [key]: value },
+      },
+    }));
   };
 
   const saveBlock = async () => {
@@ -46,12 +84,24 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
   };
 
   return (
-    <div className="w-full h-full grid grid-cols-6">
-      <div className="col-span-1">
-        <BlockInfo />
+    <BlockEditContext.Provider
+      value={{
+        block,
+        type,
+        updateBlockState,
+        updateBlockProperty,
+        updateBlockStyle,
+        updateBlockExtra,
+        saveBlock,
+      }}
+    >
+      <div className="w-full h-full grid grid-cols-6">
+        <div className="col-span-1">
+          <BlockInfo />
+        </div>
+        <div className="col-span-4"></div>
+        <div className="col-span-1"></div>
       </div>
-      <div className="col-span-4"></div>
-      <div className="col-span-1"></div>
-    </div>
+    </BlockEditContext.Provider>
   );
 }
