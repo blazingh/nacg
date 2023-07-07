@@ -37,7 +37,7 @@ interface BlockProprties {
 interface BaseBlock {
   id: string;
   name: string;
-  properties: BlockProprties;
+  property: BlockProprties;
 }
 
 export type Block = ComponentBlock | TextBlock | ImageBlock | ButtonBlock;

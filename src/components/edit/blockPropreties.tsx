@@ -15,7 +15,7 @@ export function BlockProperties() {
       </div>
     );
 
-  const { block, updateBlockState, saveBlock, type } = blockEditContext;
+  const { block, saveBlock, type, updateBlockStyle } = blockEditContext;
 
   switch (type) {
     case BlockType.componentBlock:

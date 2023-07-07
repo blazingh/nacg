@@ -34,7 +34,7 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
   const updateBlockProperty = (key: string, value: any) => {
     setBlock((prev) => ({
       ...prev,
-      properties: { ...prev.properties, [key]: value },
+      properties: { ...prev.property, [key]: value },
     }));
   };
 
@@ -42,8 +42,8 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
     setBlock((prev) => ({
       ...prev,
       porperties: {
-        ...prev.properties,
-        style: { ...prev.properties.style, [key]: value },
+        ...prev.property,
+        style: { ...prev.property.style, [key]: value },
       },
     }));
   };
@@ -52,8 +52,8 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
     setBlock((prev) => ({
       ...prev,
       porperties: {
-        ...prev.properties,
-        extra: { ...prev.properties.extra, [key]: value },
+        ...prev.property,
+        extra: { ...prev.property.extra, [key]: value },
       },
     }));
   };
