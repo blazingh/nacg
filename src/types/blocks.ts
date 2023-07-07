@@ -29,6 +29,17 @@ export enum Locales {
   ar = "ar",
 }
 
+interface BlockProprties {
+  style: CSSProperties;
+  extra?: { [key: string]: any };
+}
+
+interface BaseBlock {
+  id: string;
+  name: string;
+  properties: BlockProprties;
+}
+
 export type Block = ComponentBlock | TextBlock | ImageBlock | ButtonBlock;
 
 export interface CommonBlockChildren {
@@ -37,10 +48,7 @@ export interface CommonBlockChildren {
   scope: BlockChildScope;
 }
 
-export interface ComponentBlock {
-  id: string;
-  name: string;
-  style: CSSProperties;
+export interface ComponentBlock extends BaseBlock {
   children: CommonBlockChildren[];
   local_blocks: string[];
   component_blocks: string[];
@@ -55,28 +63,19 @@ export interface ComponentBlock {
   };
 }
 
-export interface TextBlock {
-  id: string;
-  name: string;
-  style: CSSProperties;
+export interface TextBlock extends BaseBlock {
   type?: TextBlockType;
   text?: string;
   key?: string;
   locale?: { [key in Locales]?: string };
 }
 
-export interface ImageBlock {
-  id: string;
-  name: string;
-  style: CSSProperties;
+export interface ImageBlock extends BaseBlock {
   type?: ImageBlockType;
   src?: string;
   key?: string;
 }
 
-export interface ButtonBlock {
-  id: string;
-  name: string;
-  style: CSSProperties;
+export interface ButtonBlock extends BaseBlock {
   text?: string;
 }
