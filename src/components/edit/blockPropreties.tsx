@@ -24,6 +24,7 @@ export function BlockProperties() {
       return (
         <div>
           <p>Block Properties</p>
+          {/*  display block properties */}
         </div>
       );
   }
