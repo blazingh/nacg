@@ -2,8 +2,6 @@
 
 import { useContext } from "react";
 import { BlockEditContext } from "./blockEdit";
-import { BlockType } from "@/types/blocks";
-import { ComponentProperties } from "./componentPorpreties";
 import { SelectionWithOptions } from "../ui/selectionWithOptions";
 import { StylesOptions } from "@/constants/styles";
 import { Button } from "../ui/button";
