@@ -4,6 +4,7 @@ import { Block, BlockType } from "@/types/blocks";
 import { createContext, useState } from "react";
 import { useToast } from "../ui/use-toast";
 import BlockInfo from "./blockInfo";
+import { BlockProperties } from "./blockPropreties";
 
 interface BlockEditProps {
   _block: Block;
@@ -40,10 +41,10 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
 
   const updateBlockStyle = (key: string, value: any) => {
     // check if property has style object
-    if (!block.property.style)
+    if (!block.property?.style)
       setBlock((prev) => ({
         ...prev,
-        porperty: {
+        property: {
           ...prev.property,
           style: { [key]: value },
         },
@@ -51,7 +52,7 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
     else
       setBlock((prev) => ({
         ...prev,
-        porperty: {
+        property: {
           ...prev.property,
           style: { ...prev.property.style, [key]: value },
         },
@@ -60,7 +61,7 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
 
   const updateBlockExtra = (key: string, value: any) => {
     // check if property has extra object
-    if (!block.property.extra)
+    if (!block.property?.extra)
       setBlock((prev) => ({
         ...prev,
         porperty: {
@@ -120,7 +121,9 @@ export default function BlockEdit({ _block, type }: BlockEditProps) {
           <BlockInfo />
         </div>
         <div className="col-span-4"></div>
-        <div className="col-span-1"></div>
+        <div className="col-span-1">
+          <BlockProperties />
+        </div>
       </div>
     </BlockEditContext.Provider>
   );

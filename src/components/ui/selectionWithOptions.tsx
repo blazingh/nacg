@@ -11,7 +11,7 @@ import {
 
 interface SelectionWithOptionsProps {
   options: { label: string; value: any }[];
-  selected: string;
+  value: string;
   label: string;
   selectLabel?: string;
   placeholder?: string;
@@ -21,7 +21,7 @@ interface SelectionWithOptionsProps {
 export function SelectionWithOptions({
   label,
   options,
-  selected,
+  value,
   placeholder,
   selectLabel,
   onChange,
@@ -29,7 +29,7 @@ export function SelectionWithOptions({
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5">
       <Label className="">{label}</Label>
-      <Select onValueChange={(e) => onChange(e)} value={selected}>
+      <Select onValueChange={(val) => onChange(val)} value={value}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
